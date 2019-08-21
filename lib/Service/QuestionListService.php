@@ -44,10 +44,11 @@ class QuestionListService
 
     private function getChoices(array $choices, string $lang) : array
     {
+        $choiceList = [];
         foreach ($choices as $choice) {
-            $choices[] = $this->getChoice($choice['text'], $lang);
+            $choiceList[] = $this->getChoice($choice['text'], $lang);
         }
-        return $choices;
+        return $choiceList;
     }
 
     private function getChoice(string $text, string $lang) : Choice
