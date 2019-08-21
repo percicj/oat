@@ -48,7 +48,13 @@ class QuestionListService
         return new QuestionList($questions);
     }
 
-    public function saveQuestion($question)
+    /**
+     * Save questions to storage
+     *
+     * @param array $question
+     * @throws Exception
+     */
+    public function saveQuestion(array $question) : void
     {
         $this->getRepository()->writeData($question);
     }

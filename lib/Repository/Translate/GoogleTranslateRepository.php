@@ -18,7 +18,7 @@ class GoogleTranslateRepository implements TranslateRepositoryInterface
         $this->googleTranslate = $googleTranslate;
     }
 
-    public function translate($text, $targetLanguage, $sourceLanguage) : string
+    public function translate(string $text, string $targetLanguage, string$sourceLanguage) : string
     {
         return $this->googleTranslate->setSource($sourceLanguage)->setTarget($targetLanguage)->translate($text);
     }
