@@ -3,14 +3,6 @@
 * [OpenAPI Generator](https://openapi-generator.tech)
 * [Slim Framework Documentation](https://www.slimframework.com/docs/)
 
-## Requirements
-
-* Web server with URL rewriting
-* PHP 7.0 or newer
-
-This package contains `.htaccess` for Apache configuration.
-If you use another server(Nginx, HHVM, IIS, lighttpd) check out [Web Servers](https://www.slimframework.com/docs/v3/start/web-servers.html) doc.
-
 ## Installation via [Composer](https://getcomposer.org/)
 
 Navigate into your project's root directory and execute the bash command shown below.
