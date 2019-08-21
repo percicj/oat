@@ -21,13 +21,11 @@ $ composer install
 
 ## Start devserver
 
-Run the following command in terminal to start localhost web server, assuming `./php-slim-server/` is public-accessible directory with `index.php` file:
+The code runs on a docker image. To start the docker image with PHP and nginx run the following command in the root of the project.
+
 ```bash
-$ php -S localhost:8888 -t php-slim-server
+$ docker-compose up
 ```
-> **Warning** This web server was designed to aid application development.
-> It may also be useful for testing purposes or for application demonstrations that are run in controlled environments.
-> It is not intended to be a full-featured web server. It should not be used on a public network.
 
 ## Tests
 
