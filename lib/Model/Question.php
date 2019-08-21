@@ -15,6 +15,8 @@
  */
 namespace OpenAPIServer\Model;
 
+use DateTime;
+
 /**
  * Question
  *
@@ -26,11 +28,18 @@ class Question
 {
     
     /** @var string $text */
-    private $text;
+    public $text;
     
-    /** @var \DateTime $createdAt Creation date of the question*/
-    private $createdAt;
+    /** @var DateTime $createdAt Creation date of the question*/
+    public $createdAt;
     
-    /** @var \OpenAPIServer\Model\Choice[] $choices Choices associated to the question*/
-    private $choices;
+    /** @var Choice[] $choices Choices associated to the question*/
+    public $choices;
+
+    public function __construct(string $text, DateTime $createdAt, array $choices)
+    {
+        $this->text = $text;
+        $this->createdAt = $createdAt;
+        $this->choices = $choices;
+    }
 }

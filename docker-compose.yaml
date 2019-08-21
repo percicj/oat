@@ -7,3 +7,8 @@ services:
       - "80:8080"
     volumes:
       - .:/var/www/html
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"

@@ -24,14 +24,14 @@
  */
 namespace OpenAPIServer;
 
+use OpenAPIServer\Repository\Translate\GoogleTranslateRepository;
+use OpenAPIServer\Service\QuestionListService;
 use Slim\App;
 use Slim\Interfaces\RouteInterface;
 use Psr\Container\ContainerInterface;
 use InvalidArgumentException;
-use Dyorg\TokenAuthentication;
-use Dyorg\TokenAuthentication\TokenSearch;
-use Psr\Http\Message\ServerRequestInterface;
 use Exception;
+use Stichoza\GoogleTranslate\GoogleTranslate;
 
 /**
  * SlimRouter Class Doc Comment
@@ -84,14 +84,11 @@ class SlimRouter
     {
         $this->slimApp = new App($settings);
 
-        // middlewares requires Psr\Container\ContainerInterface
-        $container = $this->slimApp->getContainer();
-
+        $this->handleDependencies();
 
         foreach ($this->operations as $operation) {
             $callback = function ($request, $response, $arguments) use ($operation) {
                 $message = "How about extending {$operation['classname']} by {$operation['apiPackage']}\\{$operation['userClassname']} class implementing {$operation['operationId']} as a {$operation['httpMethod']} method?";
-                throw new Exception($message);
                 return $response->withStatus(501)->write($message);
             };
             $middlewares = [];
@@ -155,5 +152,21 @@ class SlimRouter
     public function getSlimApp()
     {
         return $this->slimApp;
+    }
+
+    private function handleDependencies()
+    {
+        // middleware requires Psr\Container\ContainerInterface
+        $container = $this->slimApp->getContainer();
+
+        $container['questionsListService'] = function($container) {
+            $settings = $container->get('settings');
+            return new QuestionListService(
+                $settings['config'],
+                new GoogleTranslateRepository(
+                    new GoogleTranslate()
+                )
+            );
+        };
     }
 }

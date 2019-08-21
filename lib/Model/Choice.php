@@ -26,5 +26,10 @@ class Choice
 {
     
     /** @var string $text */
-    private $text;
+    public $text;
+
+    public function __construct(string $text)
+    {
+        $this->text = $text;
+    }
 }

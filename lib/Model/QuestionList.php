@@ -24,7 +24,11 @@ namespace OpenAPIServer\Model;
  */
 class QuestionList
 {
-    
-    /** @var \OpenAPIServer\Model\Question[] $data */
-    private $data;
+    /** @var Question[] $data */
+    public $data;
+
+    public function __construct(array $data)
+    {
+        $this->data = $data;
+    }
 }

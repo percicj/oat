@@ -13,6 +13,7 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 use OpenAPIServer\SlimRouter;
+use PHLAK\Config\Config;
 
 $config = [];
 
@@ -70,6 +71,8 @@ $config['settings'] = [
      * Default: false
      */
     // 'routerCacheFile' => false,
+
+    'config' => new Config('config.php'),
 ];
 
 /**
