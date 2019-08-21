@@ -6,5 +6,5 @@ interface DataRepositoryInterface
 {
     public function getData() : array;
 
-    public function writeData() : array;
+    public function writeData($data) : void;
 }

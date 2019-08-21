@@ -28,6 +28,7 @@ class CSVDataRepository implements DataRepositoryInterface
         while(($row = fgetcsv($file)) !== false) {
             $data[] = $row;
         }
+        fclose($file);
         unset($data[0]);
         return $data;
     }
@@ -55,8 +56,18 @@ class CSVDataRepository implements DataRepositoryInterface
         return $parsedData;
     }
 
-    public function writeData(): array
+    public function writeData($data): void
     {
-        // TODO: Implement writeData() method.
+        $row = [
+            $data['text'],
+            date('Y-m-d H:i:s'),
+            $data['choices'][0]['text'],
+            $data['choices'][1]['text'],
+            $data['choices'][2]['text'],
+        ];
+
+        $file = fopen($this->filename, 'a+');
+        fputcsv($file, $row);
+        fclose($file);
     }
 }

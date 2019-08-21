@@ -14,7 +14,7 @@ class DefaultApi extends AbstractDefaultApi
     {
         /** @var QuestionListService $service */
         $service = $this->container->get('questionsListService');
-        $lang = $request->getQueryParam('lang');
+        $lang = $request->getQueryParam('lang') ?: '';
 
         try {
             $questionList = $service->getQuestionList($lang);
@@ -28,7 +28,16 @@ class DefaultApi extends AbstractDefaultApi
 
     public function questionsPost(ServerRequestInterface $request, ResponseInterface $response, array $args)
     {
-
+        $body = $request->getParsedBody();
+        $service = $this->container->get('questionsListService');
+        try {
+            $service->saveQuestion($body);
+            return $response->write('Success')->withStatus(200);
+        } catch (Error $e) {
+            return $response->write($e->getMessage())->withStatus(500);
+        } catch (Exception $exception) {
+            return $response->write($exception->getMessage())->withStatus(400);
+        }
     }
 
 }

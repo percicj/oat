@@ -8,7 +8,6 @@ use OpenAPIServer\Model\QuestionList;
 use OpenAPIServer\Model\Question;
 use OpenAPIServer\Model\Choice;
 use OpenAPIServer\Repository\Data\DataRepositoryInterface;
-use OpenAPIServer\Repository\Translate\TranslateRepositoryInterface;
 use PHLAK\Config\Config;
 
 class QuestionListService
@@ -29,6 +28,13 @@ class QuestionListService
         $this->translateService = $translateService;
     }
 
+    /**
+     * Return list of questions with choices
+     *
+     * @param string $lang
+     * @return QuestionList
+     * @throws Exception
+     */
     public function getQuestionList(string $lang) : QuestionList
     {
         $data = $this->getData();
@@ -40,6 +46,11 @@ class QuestionListService
         $questions = $this->getQuestions($data, $lang);
 
         return new QuestionList($questions);
+    }
+
+    public function saveQuestion($question)
+    {
+        $this->getRepository()->writeData($question);
     }
 
     private function getChoices(array $choices, string $lang) : array
