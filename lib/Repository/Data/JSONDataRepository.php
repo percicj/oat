@@ -18,4 +18,9 @@ class JSONDataRepository implements DataRepositoryInterface
     {
         return json_decode(file_get_contents($this->filename), true);
     }
+
+    public function writeData(): array
+    {
+        // TODO: Implement writeData() method.
+    }
 }

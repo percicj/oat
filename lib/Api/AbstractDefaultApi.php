@@ -69,11 +69,7 @@ abstract class AbstractDefaultApi
      */
     public function questionsGet(ServerRequestInterface $request, ResponseInterface $response, array $args)
     {
-        $queryParams = $request->getQueryParams();
-        $lang = $request->getQueryParam('lang');
         $message = "How about implementing questionsGet as a GET method in OpenAPIServer\Api\DefaultApi class?";
-        throw new Exception($message);
-
         return $response->write($message)->withStatus(501);
     }
 
@@ -91,10 +87,7 @@ abstract class AbstractDefaultApi
      */
     public function questionsPost(ServerRequestInterface $request, ResponseInterface $response, array $args)
     {
-        $body = $request->getParsedBody();
         $message = "How about implementing questionsPost as a POST method in OpenAPIServer\Api\DefaultApi class?";
-        throw new Exception($message);
-
         return $response->write($message)->withStatus(501);
     }
 }

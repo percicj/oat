@@ -19,14 +19,14 @@ class QuestionListService
     private $config;
 
     /**
-     * @var TranslateRepositoryInterface $translator
+     * @var TranslateService $translateService
      */
-    private $translator;
+    private $translateService;
 
-    public function __construct(Config $config, TranslateRepositoryInterface $translator)
+    public function __construct(Config $config, TranslateService $translateService)
     {
         $this->config = $config;
-        $this->translator = $translator;
+        $this->translateService = $translateService;
     }
 
     public function getQuestionList(string $lang) : QuestionList
@@ -54,7 +54,7 @@ class QuestionListService
     private function getChoice(string $text, string $lang) : Choice
     {
         return new Choice(
-            $this->translator->translate($text, $lang)
+            $this->translateService->translate($text, $lang)
         );
     }
 
@@ -72,7 +72,7 @@ class QuestionListService
     private function getQuestion(string $text, DateTime $createdAt, array $choices, string $lang) : Question
     {
         return new Question(
-            $this->translator->translate($text, $lang),
+            $this->translateService->translate($text, $lang),
             $createdAt,
             $choices
         );

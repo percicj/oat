@@ -26,6 +26,7 @@ namespace OpenAPIServer;
 
 use OpenAPIServer\Repository\Translate\GoogleTranslateRepository;
 use OpenAPIServer\Service\QuestionListService;
+use OpenAPIServer\Service\TranslateService;
 use Slim\App;
 use Slim\Interfaces\RouteInterface;
 use Psr\Container\ContainerInterface;
@@ -159,13 +160,19 @@ class SlimRouter
         // middleware requires Psr\Container\ContainerInterface
         $container = $this->slimApp->getContainer();
 
+        $container['translateService'] = function($container) {
+            return new TranslateService(
+                new GoogleTranslateRepository(
+                    new GoogleTranslate()
+                )
+            );
+        };
+
         $container['questionsListService'] = function($container) {
             $settings = $container->get('settings');
             return new QuestionListService(
                 $settings['config'],
-                new GoogleTranslateRepository(
-                    new GoogleTranslate()
-                )
+                $container->get('translateService')
             );
         };
     }

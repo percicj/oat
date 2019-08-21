@@ -54,4 +54,9 @@ class CSVDataRepository implements DataRepositoryInterface
         }
         return $parsedData;
     }
+
+    public function writeData(): array
+    {
+        // TODO: Implement writeData() method.
+    }
 }
